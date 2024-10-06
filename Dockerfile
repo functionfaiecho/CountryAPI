@@ -5,13 +5,13 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy the requirements.txt file into the container
-COPY requirements.txt .
+COPY requirements.txt /app/
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies (check for missing or broken requirements file)
+RUN if [ -f "requirements.txt" ]; then pip install --no-cache-dir -r requirements.txt; else echo "requirements.txt not found!"; exit 1; fi
 
 # Copy the rest of the application code to the working directory
-COPY . .
+COPY . /app/
 
 # Expose the port the app will run on
 EXPOSE 8000
