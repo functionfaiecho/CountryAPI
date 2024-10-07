@@ -13,7 +13,7 @@ limiter = Limiter(key_func=get_remote_address)
 # Create FastAPI instance
 app = FastAPI()
 
-# Add CORS middleware to allow cross-origin requests for GET access to anyone
+# CORS middleware to allow cross-origin requests for GET access to anyone
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allow public access to GET requests for everyone
