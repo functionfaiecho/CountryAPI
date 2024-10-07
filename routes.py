@@ -21,7 +21,12 @@ def convert_object_id(destination):
         destination["_id"] = str(destination["_id"])
     return destination
 
-# Search destinations by Destination, Country, or Description (Public access)
+# Add a root route that returns a welcome message
+@router.get("/")
+def read_root():
+    return {"message": "Welcome to CountriesAPI! Use /docs for API documentation."}
+
+# Search destinations by Destination, Country, or Description - The public can do this.
 @router.get("/destinations/search", response_model=List[DestinationModel])
 @limiter.limit("10/minute")  # Rate limit: 10 requests per minute
 async def search_destinations(request: Request, destination: str = None, country: str = None, description: str = None):
@@ -91,7 +96,7 @@ async def update_destination(request: Request, id: str, destination: Destination
     return convert_object_id(updated_destination)
 
 # Delete a destination (Admin only)
-@router.delete("/destinations/{id}", status_code=204)
+@router.delete("/destinations/{id}", status_code=200)
 @limiter.limit("3/minute")  # Rate limit: 3 delete requests per minute (admin only)
 async def delete_destination(request: Request, id: str, username: str = Depends(verify_admin)):
     # Delete the destination by its ObjectId
@@ -99,3 +104,4 @@ async def delete_destination(request: Request, id: str, username: str = Depends(
     # Raise an HTTP 404 error if the destination could not be deleted
     if delete_result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Destination not found")
+    return {"message": "Destination deleted successfully"}  # Added a message to confirm deletion
