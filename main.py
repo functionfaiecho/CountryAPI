@@ -22,6 +22,5 @@ app.state.limiter = limiter
 app.include_router(router)
 
 if __name__ == "__main__":
-    # Use the PORT environment variable provided by Railway
-    port = int(os.getenv("PORT", 8000))  # Default to 8000 if PORT is not set (for local testing)
+    port = int(os.getenv("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
