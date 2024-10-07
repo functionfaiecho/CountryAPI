@@ -1,3 +1,4 @@
+import os  # Import os to access environment variables
 from fastapi import FastAPI
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -21,4 +22,6 @@ app.state.limiter = limiter
 app.include_router(router)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # Use the PORT environment variable provided by Railway
+    port = int(os.getenv("PORT", 8000))  # Default to 8000 if PORT is not set (for local testing)
+    uvicorn.run(app, host="0.0.0.0", port=port)
