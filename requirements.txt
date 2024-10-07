@@ -5,3 +5,5 @@ motor
 pydantic
 bcrypt
 slowapi
+
+# Requirements
