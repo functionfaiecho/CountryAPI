@@ -38,4 +38,16 @@ The base URL for all API requests is [https://countriesapi.crabcakes.dev](https:
 
 Please note that this API was created for educational purposes. Any statements in the descriptions do not constitute the opinion of the developer. In the interest of keeping things uniform, if you would like me to add a destination, please raise a GitHub issue. I will endeavour to address these within 3 hours of their receipt.
 
+## Example Schema:
+
+```bash
+[
+  {
+    "Destination": "Singapore",
+    "Country": "Singapore",
+    "Description": "A global financial hub known for its efficient transport and cultural diversity. Home to the best airport in the world, Changi Airport, and a foodie's paradise.",
+    "Link": "https://www.visitsingapore.com/"
+  }
+]
+```
 🦀
